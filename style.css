@@ -1,0 +1,238 @@
+html, body {
+    background-color: #212121;
+}
+.titre {
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+.titre_page {
+    font-size: 60px;
+    color: white;
+    text-align: center;
+    margin-top: 0;
+}
+.infos {
+    color: grey;
+    font-size: 20px;
+    order: 1;
+    justify-self: flex-start;
+    margin-right: auto;
+}
+.link_deco {
+    color: white;
+    text-decoration: none;
+}
+.deco {
+    order: 3;
+    justify-self: self-end;
+    margin-left: auto;
+}
+.link_deco:hover {
+    color: grey;
+}
+.infos_serveur {
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+.conteneur {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-left: 10%;
+    margin-right: 10%;
+    color: white;
+    font-family: 'Acme', sans-serif;
+}
+.paras {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: white;
+    font-size: 25px;
+    margin-bottom: 40px;
+}
+.paras p {
+    font-family: 'Acme', sans-serif;
+}
+.p1 {
+    margin-bottom: 0;
+}
+.p2 {
+    margin: 0;
+}
+.p3 {
+    margin-top: 0;
+}
+input {
+    padding: 10px;
+    border-radius: 10px;
+    background-color: beige;
+    font-size: 20px;
+    font-family: 'Acme', sans-serif;
+    text-transform: uppercase;
+    text-align: center;
+}
+form {
+    display: flex;
+    flex-direction: column;
+    color: white;
+    font-family: 'Acme', sans-serif;
+}
+form label {
+    font-size: 20px;
+}
+label {
+    text-align: center;
+}
+.boutons {
+    display: flex;
+}
+button {
+    padding: 10px;
+    border-radius: 10px;
+    border: none;
+    font-size: 18px;
+    background-color: grey;
+    border: 2px solid grey;
+    color: white;
+    cursor: pointer;
+}
+.b1 {
+    margin-right: 5px;
+}
+.b2 {
+    margin-left: 5px;
+}
+button:hover {
+    background-color: white;
+    color: #212121;
+    border: 2px solid grey;
+}
+.session {
+    color: rgb(250, 70, 70);
+    font-size: 25px;
+    margin-top: 40px;
+    margin-bottom: -40px;
+    font-family: 'Acme', sans-serif;
+}
+footer .copyright {
+    display: flex;
+    justify-content: center;
+    margin-top: 100px;
+}
+footer .copyright p {
+    color: grey;
+}
+
+@import 'https://fonts.googleapis.com/css?family=Roboto+Mono:100';
+
+.container {
+    height: 100%;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+}
+.text {
+    font-weight: 100;
+    font-size: 48px;
+    color: #FAFAFA;
+}
+.dud {
+    color: #757575;
+}
+.monPerso {
+    width: 20%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 2px solid white;
+    background-color: #757575;
+    border-radius: 10px;
+    margin: 10px;
+}
+.containeurPersos {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+}
+.blocPerso {
+    width: 22%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 2px solid white;
+    border-radius: 10px;
+    margin: 10px;
+}
+.blocPerso a {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-decoration: none;
+    color: white;
+}
+.blocPerso:hover {
+    border: 2px solid red ;
+    background-color: rgb(204, 177, 177);
+}
+.blocPerso:hover a {
+    color: black;
+    cursor: crosshair;
+}
+.red {
+    color: rgb(243, 69, 69);
+}
+.green {
+    color: rgb(98, 179, 98);
+}
+
+/********* Jeu **********/
+.titre_page a {
+    text-decoration: none;
+    color: white;
+}
+
+/****** Combat attente ********/
+.attente {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.titre_combat {
+    font-size: 60px;
+    color: #f1f1f1;
+}
+
+/********** Resultats combat *******/
+.resultats {
+    width: 100%;
+}
+.para {
+    font-size: 20px;
+    color: white;
+    font-family: 'Acme', sans-serif;
+    text-align: center;
+}
+.bouton {
+    text-align: center;
+    margin-top: 80px;
+}
+.bouton a {
+    text-decoration: none;
+    border: 1px solid grey;
+    color: white;
+    font-size: 20px;
+    background-color: grey;
+    padding: 10px 20px;
+    border-radius: 20px;
+}
+.bouton a:hover {
+    color: black;
+    background-color: white;
+    border: 1px solid black;
+}
