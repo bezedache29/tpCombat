@@ -1,11 +1,12 @@
 <?php
 
     class Personnage {
-        private $_id;
-        private $_nom;
-        private $_degats;
-        private $_niveau;
-        private $_exp;
+        protected $_id;
+        protected $_nom;
+        protected $_degats;
+        protected $_niveau;
+        protected $_exp;
+        protected $_energie; // Energie sur 100
 
         const CEST_MOI = 1;
         const PERSONNAGE_TUE = 2;
@@ -102,6 +103,19 @@
             }
         }
 
+        public function setEnergiePerso($valeur) {
+            $valeur = intval($valeur);
+            if(!(is_int($valeur))) {
+                trigger_error('Les energies doivent être des chiffres');
+                return;
+            }else if($valeur < 1 && $valeur > 100) {
+                trigger_error('Les energies doivent être entre 1 et 100');
+                return;
+            }else {
+                $this->_energie = $valeur;
+            }
+        }
+
         public function setExpPerso($exp) {
             $exp = intval($exp);
             if(!(is_int($exp))) {
@@ -113,6 +127,16 @@
             }else {
                 $this->_exp = $exp;
             } 
+        }
+        
+
+        public function lanceDes($min, $max) {
+            return random_int($min, $max);
+        }
+
+        public function perteEnergie($valeur) {
+            $nouvelleEnergie = $this->_energie - $valeur;
+            $this->setEnergiePerso($nouvelleEnergie);
         }
 
         // GETTERS
@@ -130,5 +154,8 @@
         }
         public function getExpPerso() {
             return $this->_exp;
+        }
+        public function getEnergiePerso() {
+            return $this->_energie;
         }
     }

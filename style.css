@@ -388,3 +388,22 @@ h1 {
       text-align: center;
   }
 
+  /********** Aventure **********/
+.containeur_aventure {
+    display: flex;
+    width: 100%;
+}
+.bloc_aventure {
+    width: 50%;
+}
+.perso_aventure {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.perso_aventure .monPerso{
+    width: 80%;
+}
+.titre_histoire {
+    text-align: center;
+}

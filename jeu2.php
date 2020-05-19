@@ -29,6 +29,7 @@
             <p>Expériences : <?= $monPerso->getExpPerso(); ?></p>
             <p>Dégats : <?= $monPerso->getDegatsPerso(); ?> / 100</p>
             <p>Rage : <?= $monPerso->getRagePerso(); ?> / 40</p>
+            <p>Energie : <?= $monPerso->getEnergiePerso(); ?> / 100</p>
         </div>
         <h2>Commencer l'aventure ?</h2>
         <a href="aventure.php" class="game">J'entre dans le GAME !</a>

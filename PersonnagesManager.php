@@ -52,16 +52,17 @@
 
         public function modifPerso(Personnage $perso) {
             // Modifie un personnage dans la BDD
-            $query = $this->_db->prepare('UPDATE tpcombat SET degatsPerso = :degatsPerso, niveauPerso = :niveauPerso, expPerso = :expPerso WHERE idPerso = :idPerso');
+            $query = $this->_db->prepare('UPDATE tpcombat SET degatsPerso = :degatsPerso, niveauPerso = :niveauPerso, expPerso = :expPerso, energiePerso = :energiePerso WHERE idPerso = :idPerso');
             $values = [
                 'niveauPerso' => $perso->getNiveauPerso(),
                 'expPerso' => $perso->getExpPerso(),
                 'degatsPerso' => $perso->getDegatsPerso(),
-                'idPerso' => $perso->getIdPerso()
+                'idPerso' => $perso->getIdPerso(),
+                'energiePerso' => $perso->getEnergiePerso()
             ];
             $query->execute($values);
 
-            print_r($query->errorInfo());
+            //print_r($query->errorInfo());
         }
 
         public function supprPerso(Personnage $perso) {
