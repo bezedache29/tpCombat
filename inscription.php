@@ -1,10 +1,12 @@
 <?php
     include('config/init.php');
     include('header.php');
+
+    //print_r($_SESSION);
 ?>
 <section class="section_container">
     <h1>Création d'un personnage</h1>
-    <form method="post" action="traitements/traitement_inscription" class="from_inscription">
+    <form method="post" action="traitements/traitement_inscription.php" class="from_inscription">
         <div class="blocs">
             <div class="bloc">
                 <div class="labels">
@@ -12,15 +14,14 @@
                     <input type="email" id="email" name="mail" class="input_inscription" />
                 </div>
                 <div class="labels">
-                    <label for="pwd1">Votre mot de passe</label>
-                    <input type="password" name="pwd1" class="input_inscription" id="pwd1" />
-                    
+                    <label for="pseudo">Votre pseudo</label>
+                    <input type="text" name="pseudo" class="input_inscription caps" id="pseudo" />
                 </div>
             </div>
             <div class="bloc">
                 <div class="labels">
-                    <label for="pseudo">Votre pseudo</label>
-                    <input type="text" name="pseudo" class="input_inscription caps" id="pseudo" />
+                    <label for="pwd1">Votre mot de passe</label>
+                    <input type="password" name="pwd1" class="input_inscription" id="pwd1" />
                 </div>
                 <div class="labels">
                     <label for="pwd2">Confirmer mot de passe</label>
@@ -42,8 +43,19 @@
             <button>S'enregistrer</button>
             <a href="index.php">Annuler</a>
         </div>
-        
     </form>
+<?php
+    if(isset($_SESSION)) {
+        if(isset($_SESSION['message'])) {
+            foreach($_SESSION['message'] as $message) {
+?>
+    <p class="session"><?= $message ?></p>
+<?php
+            }
+        unset($_SESSION['message']);
+        }
+    }
+?>
 
 </section>
 <?php

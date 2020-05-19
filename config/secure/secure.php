@@ -1,5 +1,5 @@
 <?php
-    if(!(isset($_SESSION['id_client']))) {
+    if(!(isset($_SESSION['perso']))) {
         header('Location: index.php');
     }
 ?>

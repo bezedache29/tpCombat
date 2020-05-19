@@ -22,8 +22,8 @@
             $verifPwd = $manager->verifPwd($pwd1, $pwd2);
             if($verifPwd == 0) {
                 $_SESSION['message'][] = "Les mots de passe ne sont pas identique";
-                echo 'Les mots de passe ne sont pas identique';
-                //header('Location: ../index.php');
+                //echo 'Les mots de passe ne sont pas identique';
+                header('Location: ../index.php');
             }else {
                 // Création du joueur dans la BDD
                 $manager->addJoueur($mail, $pwd1);
@@ -39,21 +39,17 @@
                 // On les inserent dans une session
                 $_SESSION['perso'] = $perso;
 
-                echo 'Salut';
+                //print_r($_SESSION['perso']);
 
-                print_r($_SESSION);
-
-                print_r($_SESSION['perso']);
-
-                //header('Location: ../jeu.php');
+                header('Location: ../jeu2.php');
             }
 
         }elseif($verifMail == 1) {
             $_SESSION['message'][] = "Cette adrresse Mail existe déjà !";
-            echo 'Cette adrresse Mail existe déjà !';
-            //header('Location: ../index.php');
+            //echo 'Cette adrresse Mail existe déjà !';
+            header('Location: ../inscription.php');
         }else {
-            //header('Location: ../index.php');
+            header('Location: ../index.php');
         }
     }else {
         echo 'nope !';

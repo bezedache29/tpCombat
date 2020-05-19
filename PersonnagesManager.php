@@ -11,6 +11,8 @@
         const MAIL_INEXISTANT = 2;
         const MOT_DE_PASSE_CORRECT = 1;
         const MOT_DE_PASSE_INCORRECT = 0;
+        const PWD_VALIDE = 1;
+        const PWD_INVALIDE = 0;
 
         public function __construct($db) {
             $this->setDb($db);
@@ -85,7 +87,6 @@
         public function selectionPerso($valeur) {
             // Liste infos de l'id en question
             if(is_int($valeur)) {
-                echo $valeur;
                 $query = $this->_db->prepare('SELECT * FROM tpcombat WHERE idPerso = :idPerso');
                 $value = [
                     'idPerso' => $valeur
@@ -104,6 +105,17 @@
 
                 return $donnees;
             }
+        }
+
+        public function RecupIdPerso($mail) {
+            $query = $this->_db->prepare('SELECT * FROM joueurs INNER JOIN tpcombat ON joueurs.id_joueur = tpcombat.id_joueur WHERE joueurs.mail_joueur = :mail_joueur');
+            $value = [
+                'mail_joueur' => $mail
+            ];
+            $query->execute($value);
+            $donnees = $query->fetch();
+
+            return $donnees['idPerso'];
         }
 
         public function compterPersos() {
@@ -144,14 +156,14 @@
                 $mailVide = self::MAIL_VIDE;
                 return $mailVide;
             }else {
-                $query = $this->_db->prepare('SELECT * FROM tpcombat WHERE mailPerso = :mailPerso');
+                $query = $this->_db->prepare('SELECT * FROM joueurs WHERE mail_joueur = :mail_joueur');
                 $value = [
-                    'mailPerso' => $mail
+                    'mail_joueur' => $mail
                 ];
                 $query->execute($value);
                 $donnees = $query->fetch();
 
-                if($donnees['mailPerso'] == $mail) {
+                if($donnees['mail_joueur'] == $mail) {
                     return self::MAIL_EXISTANT;
                 }else {
                     return self::MAIL_INEXISTANT;
@@ -198,5 +210,20 @@
             $query->execute($values);
 
             print_r($query->errorInfo());
+        }
+
+        public function verifPwdJoueur($mail, $pwd) {
+            $query = $this->_db->prepare('SELECT * FROM joueurs WHERE mail_joueur = :mail_joueur');
+            $value = [
+                'mail_joueur' => $mail
+            ];
+            $query->execute($value);
+            $donnees = $query->fetch();
+
+            if($donnees['pwd_joueur'] == $pwd) {
+                return self::PWD_VALIDE;
+            }else {
+                return self::PWD_INVALIDE;
+            }
         }
     }

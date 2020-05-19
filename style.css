@@ -45,6 +45,21 @@ html, body {
     color: white;
     font-family: 'Acme', sans-serif;
 }
+.conteneur .game {
+    text-decoration: none;
+    font-size: 18px;
+    padding: 20px 30px;
+    background-color: grey;
+    border-radius: 20px;
+    color: white;
+    margin-left: 10px;
+    margin-right: 10px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+.conteneur .game:hover {
+    color: black;
+    background-color: white;
+}
 .paras {
     display: flex;
     flex-direction: column;
@@ -220,13 +235,13 @@ h1 {
     color: white;
     font-size: 35px;
 }
-.from_inscription {
+.from_inscription, .form_connexion {
     display: flex;
     width: 100%;
     align-items: center;
     flex-direction: column;
 }
-.from_inscription input {
+.from_inscription input, .form_connexion input {
     margin-bottom: 40px;
     padding: 10px 20px;
     border-radius: 10px;
@@ -239,7 +254,7 @@ h1 {
     font-family: 'Acme', sans-serif;
     font-size: 18px;
 }
-.from_inscription label {
+.from_inscription label, .form_connexion label {
     margin-bottom: 10px;
     color: white;
     font-size: 20px;
@@ -330,7 +345,7 @@ h1 {
     background: black;
   }
 
-  .from_inscription button {
+  .from_inscription button, .form_connexion button {
       background-color: grey;
       border-style: none;
       padding: 20px;
@@ -342,18 +357,18 @@ h1 {
       margin-right: 10px;
       font-family: Arial, Helvetica, sans-serif;
   }
-  .from_inscription button:hover {
+  .from_inscription button:hover, .form_connexion button:hover {
       background-color: green;
       color: black;
       cursor: pointer;
   }
 
-  .boutons_inscription {
+  .boutons_inscription, .boutons_connexion {
       display: flex;
       justify-content: center;
       margin-top: 30px;
   }
-  .boutons_inscription a {
+  .boutons_inscription a, .boutons_connexion a {
       text-decoration: none;
       font-size: 18px;
       padding: 20px 30px;
@@ -364,7 +379,12 @@ h1 {
       margin-right: 10px;
       font-family: Arial, Helvetica, sans-serif;
   }
-  .boutons_inscription a:hover {
+  .boutons_inscription a:hover, .boutons_connexion a:hover {
       background-color: red;
       color: black;
   }
+
+  .section_container .session {
+      text-align: center;
+  }
+
