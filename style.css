@@ -65,50 +65,27 @@ html, body {
 .p3 {
     margin-top: 0;
 }
-input {
-    padding: 10px;
-    border-radius: 10px;
-    background-color: beige;
-    font-size: 20px;
-    font-family: 'Acme', sans-serif;
-    text-transform: uppercase;
-    text-align: center;
-}
-form {
-    display: flex;
-    flex-direction: column;
-    color: white;
-    font-family: 'Acme', sans-serif;
-}
-form label {
-    font-size: 20px;
-}
-label {
-    text-align: center;
-}
 .boutons {
     display: flex;
 }
-button {
-    padding: 10px;
-    border-radius: 10px;
-    border: none;
-    font-size: 18px;
-    background-color: grey;
-    border: 2px solid grey;
+.boutons a {
+    text-decoration: none;
     color: white;
-    cursor: pointer;
+    padding: 15px 20px;
+    border: 1px solid black;
+    border-radius: 20px;
+    background-color: grey;
+    font-size: 20px;
+}
+.boutons a:hover {
+    background-color: white;
+    color: black;
 }
 .b1 {
     margin-right: 5px;
 }
 .b2 {
     margin-left: 5px;
-}
-button:hover {
-    background-color: white;
-    color: #212121;
-    border: 2px solid grey;
 }
 .session {
     color: rgb(250, 70, 70);
@@ -236,3 +213,158 @@ footer .copyright p {
     background-color: white;
     border: 1px solid black;
 }
+
+/************** Inscription ************/
+h1 {
+    text-align: center;
+    color: white;
+    font-size: 35px;
+}
+.from_inscription {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    flex-direction: column;
+}
+.from_inscription input {
+    margin-bottom: 40px;
+    padding: 10px 20px;
+    border-radius: 10px;
+    background-color: wheat;
+    font-family: 'Acme', sans-serif;
+    font-size: 18px;
+}
+.from_inscription .caps {
+    text-transform: uppercase;
+    font-family: 'Acme', sans-serif;
+    font-size: 18px;
+}
+.from_inscription label {
+    margin-bottom: 10px;
+    color: white;
+    font-size: 20px;
+}
+.classes {
+    display: flex;
+}
+.bloc {
+    display: flex;
+    flex-direction: column;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+.blocs {
+    display: flex;
+}
+.labels {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Customize the label (the container) */
+.container {
+    display: block;
+    position: relative;
+    padding-left: 35px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    font-size: 20px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    margin-right: 10px;
+    margin-left: 10px;
+  }
+  
+  /* Hide the browser's default radio button */
+  .container input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+  }
+  
+  /* Create a custom radio button */
+  .checkmark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 25px;
+    width: 25px;
+    background-color: #eee;
+    border-radius: 50%;
+  }
+  
+  /* On mouse-over, add a grey background color */
+  .container:hover input ~ .checkmark {
+    background-color: #ccc;
+  }
+  
+  /* When the radio button is checked, add a blue background */
+  .container input:checked ~ .checkmark {
+    background-color: wheat;
+  }
+  
+  /* Create the indicator (the dot/circle - hidden when not checked) */
+  .checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+  }
+  
+  /* Show the indicator (dot/circle) when checked */
+  .container input:checked ~ .checkmark:after {
+    display: block;
+  }
+  
+  /* Style the indicator (dot/circle) */
+  .container .checkmark:after {
+    top: 9px;
+    left: 9px;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: black;
+  }
+
+  .from_inscription button {
+      background-color: grey;
+      border-style: none;
+      padding: 20px;
+      border-radius: 20px;
+      border: 1px solid black;
+      font-size: 18px;
+      color: white;
+      margin-left: 10px;
+      margin-right: 10px;
+      font-family: Arial, Helvetica, sans-serif;
+  }
+  .from_inscription button:hover {
+      background-color: green;
+      color: black;
+      cursor: pointer;
+  }
+
+  .boutons_inscription {
+      display: flex;
+      justify-content: center;
+      margin-top: 30px;
+  }
+  .boutons_inscription a {
+      text-decoration: none;
+      font-size: 18px;
+      padding: 20px 30px;
+      background-color: grey;
+      border-radius: 20px;
+      color: white;
+      margin-left: 10px;
+      margin-right: 10px;
+      font-family: Arial, Helvetica, sans-serif;
+  }
+  .boutons_inscription a:hover {
+      background-color: red;
+      color: black;
+  }

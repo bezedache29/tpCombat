@@ -3,6 +3,15 @@
     class PersonnagesManager {
         private $_db;
 
+        const PERSONNAGE_EXISTANT = 0;
+        const PERSONNAGE_INEXISTANT = 1;
+        const PERSONNAGE_VIDE = 2;
+        const MAIL_VIDE = 0;
+        const MAIL_EXISTANT = 1;
+        const MAIL_INEXISTANT = 2;
+        const MOT_DE_PASSE_CORRECT = 1;
+        const MOT_DE_PASSE_INCORRECT = 0;
+
         public function __construct($db) {
             $this->setDb($db);
         }
@@ -11,23 +20,32 @@
             $this->_db = $db;
         }
 
-        public function addPerso(Personnage $perso) {
+        public function addPerso(Personnage $perso, $id) {
             // Ajout d'un personnage dans la BDD
             // On enregistre les pseudo en majuscule dans la bdd
             $nomPerso = strtoupper($perso->getNomPerso());
+            $classePerso = $perso->getClassePerso();
 
-            $query = $this->_db->prepare('INSERT INTO tpcombat(nomPerso) VALUES(:nomPerso)');
+            $query = $this->_db->prepare('INSERT INTO tpcombat(nomPerso, classePerso, id_joueur) VALUES(:nomPerso, :classePerso, :id_joueur)');
             $value = [
                 'nomPerso' => $nomPerso,
+                'classePerso' => $classePerso,
+                'id_joueur' => $id
             ];
             $query->execute($value);
 
             $perso->hydrate([
                 'idPerso' => $this->_db->lastInsertId(),
-                'degatsPerso' => 0
+                'degatsPerso' => 0,
+                'manaPerso' => 0,
+                'ragePerso' => 0
             ]);
 
-            //print_r($query->errorInfo());
+            print_r($query->errorInfo());
+        }
+
+        public function dernierId() {
+            return $this->_db->lastInsertId();
         }
 
         public function modifPerso(Personnage $perso) {
@@ -99,14 +117,12 @@
             return $cpt;
         }
 
-        const PERSONNAGE_EXISTANT = 0;
-        const PERSONNAGE_INEXISTANT = 1;
-        const PERSONNAGE_VIDE = 2;
+        
 
         public function verifNom($nom) {
             if(empty($nom)) {
-                $nom_vide = self::PERSONNAGE_VIDE;
-                return $nom_vide;
+                $nomVide = self::PERSONNAGE_VIDE;
+                return $nomVide;
             }else {
                 $query = $this->_db->prepare('SELECT * FROM tpcombat WHERE nomPerso = :nomPerso');
                 $value = [
@@ -123,10 +139,30 @@
             }
         }
 
+        public function verifMail($mail) {
+            if(empty($mail)) {
+                $mailVide = self::MAIL_VIDE;
+                return $mailVide;
+            }else {
+                $query = $this->_db->prepare('SELECT * FROM tpcombat WHERE mailPerso = :mailPerso');
+                $value = [
+                    'mailPerso' => $mail
+                ];
+                $query->execute($value);
+                $donnees = $query->fetch();
+
+                if($donnees['mailPerso'] == $mail) {
+                    return self::MAIL_EXISTANT;
+                }else {
+                    return self::MAIL_INEXISTANT;
+                }
+            }
+        }
+
         public function verifAdversaire($nom) {
             if(empty($nom)) {
-                $nom_vide = self::PERSONNAGE_VIDE;
-                return $nom_vide;
+                $nomVide = self::PERSONNAGE_VIDE;
+                return $nomVide;
             }else {
                 $query = $this->_db->prepare('SELECT * FROM tpcombat WHERE nomPerso = :nomPerso');
                 $value = [
@@ -145,16 +181,22 @@
             }
         }
 
-        /* public function persoExiste(Personnage $perso) {
-            if(isset($perso->getId())) {
-                $query = $this->_db->prepare('SELECT * FROM tpcombat WHERE idPerso = :idPerso');
-                $value = [
-                    'idPerso' => $perso->getId()
-                ];
-                $query->execute($value);
-                $donnees = $query->fetch();
-
-                return $donnees;
+        public function verifPwd($pwd1, $pwd2) {
+            if($pwd1 != $pwd2) {
+                return self::MOT_DE_PASSE_INCORRECT;
+            }else {
+                return self::MOT_DE_PASSE_CORRECT;
             }
-        } */
+        }
+
+        public function addJoueur($mail, $pwd) {
+            $query = $this->_db->prepare('INSERT INTO joueurs(mail_joueur, pwd_joueur, date_inscription) VALUES(:mail_joueur, :pwd_joueur, NOW())');
+            $values = [
+                'mail_joueur' => $mail,
+                'pwd_joueur' => $pwd
+            ];
+            $query->execute($values);
+
+            print_r($query->errorInfo());
+        }
     }
