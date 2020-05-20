@@ -472,6 +472,17 @@ h1 {
     margin-left: 10px;
     margin-right: 10px;
 }
+.items_sac {
+    width: 25%;
+    align-self: flex-start;
+}
+#sac {
+    width: 50%;
+    margin-top: 10px;
+}
+#sac:hover {
+    cursor: pointer;
+}
 a .span_de, a .span_fuite {
     position:absolute;
     margin-top:15px;

@@ -54,6 +54,20 @@
                 <p>Rage : <?= $monPerso->getRagePerso(); ?> / 40</p>
                 <p>Energie : <?= $monPerso->getEnergiePerso(); ?> / 100</p>
             </div>
+            <div class="items_sac">
+                <img src="images/icones/sac.png" alt="Sac" id="sac" class="sac" />
+                <div id="items" class="items">
+<?php
+    //boucle permettant de voir les items
+    $donnees = $manager->listItems($monPerso->getIdPerso());
+    foreach($donnees as $item) {
+?>
+                    <img src="<?= $item['lien_item']; ?>" alt="<?= $item['nom_item']; ?>" /> X <?= $item['nb_items']; ?><br />
+<?php
+    }
+?>
+                </div>
+            </div>
         </div>
     </div>
     <div class="bloc_aventure">

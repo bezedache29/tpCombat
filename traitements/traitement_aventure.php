@@ -172,26 +172,16 @@
             $perso = $_SESSION['perso'];
             $classePerso = ucfirst($perso['classePerso']);
             $monPerso = new $classePerso($perso);
-
             
             // On verifie les niveaux des barres d'infos
             $monPerso->verifEtat();
             $manager->modifPerso($monPerso);
             $persoMAJ = $manager->selectionPerso($monPerso->getNomPerso());
-            unset($_SESSION);
+            // On supprime la session pour pouvoir rejouer a la fin du jeu sans devoir se deco/reco
+            session_unset();
             $_SESSION['perso'] = $persoMAJ;
             $_SESSION['finAventure'] = true;
             
             header('Location: ../jeu2.php');
         }
-    }if(isset($_GET['aventure'])) {
-        $perso = $_SESSION['perso'];
-        $classePerso = ucfirst($perso['classePerso']);
-        $monPerso = new $classePerso($perso);
-
-        $nomPerso = $monPerso->getNomPerso();
-        unset($_SESSION);
-        $persoMAJ = $manager->selectionPerso($nomPerso);
-        $_SESSION['perso'] = $persoMAJ;
-        header('Location: ../aventure.php');
     }

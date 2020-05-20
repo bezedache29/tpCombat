@@ -228,4 +228,15 @@
                 return self::PWD_INVALIDE;
             }
         }
+
+        public function listItems($id) {
+            $query = $this->_db->prepare('SELECT * FROM items INNER JOIN items_persos ON items.id_item = items_persos.id_item INNER JOIN tpcombat ON items_persos.idPerso = tpcombat.idPerso WHERE tpcombat.idPerso = :idPerso');
+            $value = [
+                'idPerso' => $id
+            ];
+            $query->execute($value);
+            $donnees = $query->fetchAll();
+
+            return $donnees;
+        }
     }

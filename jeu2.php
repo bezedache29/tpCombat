@@ -40,6 +40,6 @@
             </div>
         </div>
         <h2>Commencer l'aventure ?</h2>
-        <a href="traitements/traitement_aventure.php?aventure=1" class="game">J'entre dans le GAME !</a>
+        <a href="aventure.php" class="game">J'entre dans le GAME !</a>
 <?php
     }
