@@ -27,5 +27,5 @@
     requestAnimationFrame(hautBas);
 </script>
 <?php
-    header("refresh:10;url=resultats_combat.php");
+    header("refresh:10;url=aventure.php");
 ?>

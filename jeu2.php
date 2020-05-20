@@ -5,6 +5,8 @@
     //include('config/secure/secure.php');
 
     include('header.php');
+
+    print_r($_SESSION);
 ?>
 <section class="conteneur">
 <div class="titre">
@@ -22,16 +24,22 @@
         $monPerso = new $classePerso($perso);
 ?>
         <h2>Mon Personnage</h2>
-        <div class="monPerso">
+        <div class="presentation_perso">
             <p><?= $monPerso->getNomPerso(); ?></p>
-            <p>Classe : <?= $monPerso->getClassePerso(); ?></p>
-            <p>Niveau : <?= $monPerso->getNiveauPerso(); ?></p>
-            <p>Expériences : <?= $monPerso->getExpPerso(); ?></p>
-            <p>Dégats : <?= $monPerso->getDegatsPerso(); ?> / 100</p>
-            <p>Rage : <?= $monPerso->getRagePerso(); ?> / 40</p>
-            <p>Energie : <?= $monPerso->getEnergiePerso(); ?> / 100</p>
+            <div class="stats">
+                <div class="bloc1">
+                    <p>Classe : <?= $monPerso->getClassePerso(); ?></p>
+                    <p>Niveau : <?= $monPerso->getNiveauPerso(); ?></p>
+                    <p>Expériences : <?= $monPerso->getExpPerso(); ?></p>
+                </div>
+                <div class="bloc1">
+                    <p>Dégats : <?= $monPerso->getDegatsPerso(); ?> / 100</p>
+                    <p>Rage : <?= $monPerso->getRagePerso(); ?> / 40</p>
+                    <p>Energie : <?= $monPerso->getEnergiePerso(); ?> / 100</p>
+                </div>
+            </div>
         </div>
         <h2>Commencer l'aventure ?</h2>
-        <a href="aventure.php" class="game">J'entre dans le GAME !</a>
+        <a href="traitements/traitement_aventure.php?aventure=1" class="game">J'entre dans le GAME !</a>
 <?php
     }

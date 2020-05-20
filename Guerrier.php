@@ -6,7 +6,7 @@
         private $_rage = 0; // Max 20
         private $_classe = 'guerrier';
 
-        public function setRage($nb) {
+        public function setRagePerso($nb) {
             $nb = intval($nb);
             if(!(is_int($nb))) {
                 trigger_error('Les atouts doivent être des chiffres');
@@ -23,6 +23,7 @@
         public function getRagePerso() {
             return $this->_rage;
         }
+        
 
         // Fonction permettant au Guerrier d'utiliser toute sa rage pour enlever 15pts de degats subis
         public function attFulgu($perso) {
@@ -50,5 +51,21 @@
                 }
                 return $dmgRecu;
             }
+        }
+
+        public function attaquePNJ() {
+            $maRage = $this->getRagePerso();
+            if($maRage == 40) {
+                attSpecial();
+            }else {
+                $nouvelleRage = $maRage + 4;
+                $this->setRagePerso($nouvelleRage);
+            }
+        }
+
+        public function attSpecial() {
+            $this->setRagePerso(0);
+            $nouveauDegats = $this->getRagePerso() - 15;
+            $this->setDegatsPerso($nouveauDegats);
         }
     }

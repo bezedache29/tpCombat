@@ -11,6 +11,9 @@
         const CEST_MOI = 1;
         const PERSONNAGE_TUE = 2;
         const PERSONNAGE_FRAPPER = 3;
+        const PERSONNAGE_VIVANT = 4;
+        const PAS_ASSEZ_ENERGIE = 0;
+        const ASSEZ_ENERGIE = 1;
 
         public function __construct(array $donnees) {
             $this->hydrate($donnees);
@@ -128,15 +131,70 @@
                 $this->_exp = $exp;
             } 
         }
-        
 
         public function lanceDes($min, $max) {
             return random_int($min, $max);
         }
 
         public function perteEnergie($valeur) {
-            $nouvelleEnergie = $this->_energie - $valeur;
+            $monEnergie = $this->getEnergiePerso();
+            $nouvelleEnergie = $monEnergie - $valeur;
             $this->setEnergiePerso($nouvelleEnergie);
+        }
+
+        public function verifEnergie($nrj) {
+            $monEnergie = $this->getEnergiePerso();
+            if($monEnergie < $nrj) {
+                return self::PAS_ASSEZ_ENERGIE;
+            }else {
+                return self::ASSEZ_ENERGIE;
+            }
+        }
+
+        public function gainExp($valeur) {
+            $monExp = $this->getExpPerso();
+            $nouvelleExp = $monExp + $valeur;
+            $this->setExpPerso($nouvelleExp);
+        }
+
+        public function combatEnPremier() {
+            return $this->lanceDes(1, 2);
+        }
+
+        public function attaqueDuPNJ($valeur) {
+            $mesDegats = $this->getDegatsPerso();
+            $mesDegats += $valeur;
+            $this->setDegatsPerso($mesDegats);
+        }
+
+        public function verifMort() {
+            $mesDegats = $this->getDegatsPerso();
+            if($mesDegats >= 100) {
+                return self::PERSONNAGE_TUE;
+            }else {
+                return self::PERSONNAGE_VIVANT;
+            }
+        }
+
+        public function verifEtat() {
+            $exp = $this->getExpPerso();
+            $degats = $this->getDegatsPerso();
+            $nrj = $this->getEnergiePerso();
+
+            if($exp >= 100) {
+                $resteExp = $exp - 100;
+                $this->addLvl();
+                $this->setExpPerso($resteExp);
+            }
+            if($degats >= 100) {
+                $this->setDegatsPerso(100);
+            }
+            if($nrj <= 0) {
+                $this->setEnergiePerso(0);
+            }elseif($nrj >= 100) {
+                $this->setEnergiePerso(100);
+            }
+
         }
 
         // GETTERS
