@@ -7,6 +7,7 @@
         protected $_niveau;
         protected $_exp;
         protected $_energie; // Energie sur 100
+        protected $_force;
 
         const CEST_MOI = 1;
         const PERSONNAGE_TUE = 2;
@@ -14,6 +15,9 @@
         const PERSONNAGE_VIVANT = 4;
         const PAS_ASSEZ_ENERGIE = 0;
         const ASSEZ_ENERGIE = 1;
+
+        const POTION_DE_VIE = 1;
+        const EPEE = 2;
 
         public function __construct(array $donnees) {
             $this->hydrate($donnees);
@@ -34,12 +38,12 @@
                 return self::CEST_MOI;
             // Sinon on apel la methode dmgRecu pour le $perso
             }else {
-                return $perso->dmgRecu();
+                return $perso->dmgRecu($this->force);
             }
         }
 
-        public function dmgRecu() {
-            $this->_degats = $this->_degats + 5;
+        public function dmgRecu($force) {
+            $this->_degats = $this->_degats + $force;
             if($this->_degats >= 100) {
                 return self::PERSONNAGE_TUE;
             }else {
@@ -132,6 +136,19 @@
             } 
         }
 
+        public function setForcePerso($force) {
+            $force = intval($force);
+            if(!(is_int($force))) {
+                trigger_error('Les forces doivent être des chiffres');
+                return;
+            }else if($force < 1 && $force > 100) {
+                trigger_error('Les forces doivent être entre 1 et 100');
+                return;
+            }else {
+                $this->_force = $force;
+            } 
+        }
+
         public function lanceDes($min, $max) {
             return random_int($min, $max);
         }
@@ -194,7 +211,18 @@
             }elseif($nrj >= 100) {
                 $this->setEnergiePerso(100);
             }
+        }
 
+        public function effetItem($idItem) {
+            if($idItem == self::POTION_DE_VIE) {
+                $mesDegats = $this->getDegatsPerso();
+                $nouveauDegats = $mesDegats - 20;
+                $this->setDegatsPerso($nouveauDegats);
+            }elseif($idItem == self::EPEE) {
+                $maForce = $this->getForcePerso();
+                $nouvelleForce = $maForce + 5;
+                $this->setForcePerso($nouvelleForce);
+            }
         }
 
         // GETTERS
@@ -215,5 +243,8 @@
         }
         public function getEnergiePerso() {
             return $this->_energie;
+        }
+        public function getForcePerso() {
+            return $this->_force;
         }
     }

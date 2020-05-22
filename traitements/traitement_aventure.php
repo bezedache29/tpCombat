@@ -184,4 +184,24 @@
             
             header('Location: ../jeu2.php');
         }
+    }elseif(isset($_GET['id_item']) && isset($_GET['nb_items'])) {
+        $idItem = htmlspecialchars($_GET['id_item']);
+        $nbItems = htmlspecialchars($_GET['nb_items']);
+
+        $perso = $_SESSION['perso'];
+        $classePerso = ucfirst($perso['classePerso']);
+        $monPerso = new $classePerso($perso);
+
+        $idPerso = $monPerso->getIdPerso();
+
+        // Verifier les niveau avant de use l'item !!
+
+        $manager->useItem($idItem, $idPerso);
+        $monPerso->effetItem($idItem);
+        // On verifie les niveaux des barres d'infos
+        $monPerso->verifEtat();
+        $manager->modifPerso($monPerso);
+        $persoMAJ = $manager->selectionPerso($monPerso->getNomPerso());
+        $_SESSION['perso'] = $persoMAJ;
+        header('Location: ../aventure.php');
     }

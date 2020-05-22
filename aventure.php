@@ -33,6 +33,7 @@
         <h2>Mon Personnage</h2>
         <div class="monPerso">
             <div class="img_classe">
+            <h3><?= $monPerso->getNomPerso(); ?></h3>
 <?php
     if($monPerso->getClassePerso() == 'guerrier') {
 ?>
@@ -46,9 +47,9 @@
 ?>
             </div>
             <div class="stats_perso">
-                <p><?= $monPerso->getNomPerso(); ?></p>
                 <p>Classe : <?= $monPerso->getClassePerso(); ?></p>
                 <p>Niveau : <?= $monPerso->getNiveauPerso(); ?></p>
+                <p>Force : <?= $monPerso->getForcePerso(); ?></p>
                 <p>Expériences : <?= $monPerso->getExpPerso(); ?></p>
                 <p>Dégats : <?= $monPerso->getDegatsPerso(); ?> / 100</p>
                 <p>Rage : <?= $monPerso->getRagePerso(); ?> / 40</p>
@@ -62,7 +63,9 @@
     $donnees = $manager->listItems($monPerso->getIdPerso());
     foreach($donnees as $item) {
 ?>
-                    <img src="<?= $item['lien_item']; ?>" alt="<?= $item['nom_item']; ?>" /> X <?= $item['nb_items']; ?><br />
+                    <div class="un_item">
+                        <a href="traitements/traitement_aventure.php?id_item=<?= $item['id_item']; ?>&nb_items=<?= $item['nb_items']; ?>"><img class="item" src="<?= $item['lien_item']; ?>" alt="<?= $item['nom_item']; ?>" /><span class="span_item"><?= $item['description_item']; ?></span> x <?= $item['nb_items']; ?></a>
+                    </div>
 <?php
     }
 ?>
@@ -102,16 +105,19 @@
         <p>Vous vous approchez furtivement de l'endroit ou vous avez aperçu une ombre. Quel surprise lorsque vous arrivez sur place !<br />
         Un mystérieux coffre se dresse devant vous, ne demandant qu'a être ouvert.</p>
         <p>Tirez les dés pour savoir si vous êtes capable de l'ouvrir. (Vous perdrez 20 points d'énergie) Ou passez votre chemin(Vous perdrez 10 points d'énergie)</p>
+        <a href="traitements/traitement_aventure.php?action=2.4">Retourner au village</a>
 <?php
                 }elseif($numeroApproche == 2) {
 ?>
         <!-- APPROCHE AGRESSIVE -->
         <p>A venir ...</p>
+        <a href="traitements/traitement_aventure.php?action=2.4">Retourner au village</a>
 <?php
                 }else {
                     // Demande de l'aide + perte XP
 ?>
         <p>Bientôt ...</p>
+        <a href="traitements/traitement_aventure.php?action=2.4">Retourner au village</a>
 <?php
                 }
             }
@@ -188,9 +194,13 @@
                 
 
                 }elseif($numeroApproche == 2) {
-
+?>
+    <a href="traitements/traitement_aventure.php?action=2.4">Retourner au village</a>
+<?php
                 }else {
-
+?>
+    <a href="traitements/traitement_aventure.php?action=2.4">Retourner au village</a>
+<?php
                 }
             }
         }else {
@@ -198,9 +208,11 @@
         <p>Vous avez perdu 10 pts d'énergie et gagné 5 pts d'experiences</p>
         <p>Ce chemin vous mène à une petite maison caché a l'entrée d'une forêt</p>
         <p>Tirez les dés pour connaitre l'intérêt de cette batisse. (Vous perdrez 10 points d'énergie)</p>
+        <a href="traitements/traitement_aventure.php?action=2.4">Retourner au village</a>
 <?php
         }
     }
 ?>
     </div>
 </div>
+<script src="script.js"></script>

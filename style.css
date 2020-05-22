@@ -483,6 +483,9 @@ h1 {
 #sac:hover {
     cursor: pointer;
 }
+#items {
+    display: none;
+}
 a .span_de, a .span_fuite {
     position:absolute;
     margin-top:15px;
@@ -496,7 +499,7 @@ a .span_de, a .span_fuite {
     transition:all .25s;
     opacity:0;
 }
-a:hover .span_de, a:focus .span_de, a:hover .span_fuite, a:focus .span_fuite {
+a:hover .span_de, a:focus .span_de, a:hover .span_fuite, a:focus .span_fuite, a:hover .span_item, a:focus .span_item {
     transform:scale(1) rotate(0);
     opacity:1;      
 }
@@ -516,4 +519,27 @@ a .span_combat {
 a:hover .span_combat {
     transform:scale(1) rotate(0);
     opacity:1; 
+}
+a .span_item {
+    position:absolute;
+    margin-top:-45px;
+    margin-left:-85px;
+    color:white;
+    background:rgba(0,0,0,.9);
+    padding:15px;
+    border-radius:3px;
+    box-shadow:0 0 2px rgba(0,0,0,.5);
+    transform:scale(0) rotate(-12deg);
+    transition:all .25s;
+    opacity:0;
+}
+.un_item a {
+    display: flex;
+    align-items: center;
+    margin-top: 5px;
+    text-decoration: none;
+    color: white;
+}
+.item {
+    width: 50%;
 }

@@ -52,14 +52,15 @@
 
         public function modifPerso(Personnage $perso) {
             // Modifie un personnage dans la BDD
-            $query = $this->_db->prepare('UPDATE tpcombat SET degatsPerso = :degatsPerso, niveauPerso = :niveauPerso, expPerso = :expPerso, energiePerso = :energiePerso, ragePerso = :ragePerso WHERE idPerso = :idPerso');
+            $query = $this->_db->prepare('UPDATE tpcombat SET degatsPerso = :degatsPerso, niveauPerso = :niveauPerso, expPerso = :expPerso, energiePerso = :energiePerso, ragePerso = :ragePerso, forcePerso = :forcePerso WHERE idPerso = :idPerso');
             $values = [
                 'niveauPerso' => $perso->getNiveauPerso(),
                 'expPerso' => $perso->getExpPerso(),
                 'degatsPerso' => $perso->getDegatsPerso(),
                 'idPerso' => $perso->getIdPerso(),
                 'energiePerso' => $perso->getEnergiePerso(),
-                'ragePerso' => $perso->getRagePerso()
+                'ragePerso' => $perso->getRagePerso(),
+                'forcePerso' => $perso->getForcePerso()
             ];
             $query->execute($values);
 
@@ -238,5 +239,47 @@
             $donnees = $query->fetchAll();
 
             return $donnees;
+        }
+
+        public function useItem($idItem, $idPerso) {
+            $query = $this->_db->prepare('SELECT * FROM items_persos WHERE idPerso = :idPerso AND id_item = :id_item');
+            $values = [
+                'idPerso' => $idPerso,
+                'id_item' => $idItem
+            ];
+            $query->execute($values);
+            $item = $query->fetch();
+
+            $newNbItem = $item['nb_items'] -= 1;
+            if($newNbItem == 0) {
+                $this->supprItem($idItem, $idPerso);
+            }else {
+                $this->modifItem($idItem, $idPerso, $newNbItem);
+            }
+
+            //print_r($query->errorInfo());
+        }
+
+        public function supprItem($idItem, $idPerso) {
+            $query = $this->_db->prepare('DELETE FROM items_persos WHERE idPerso = :idPerso AND id_item = :id_item');
+            $values = [
+                'idPerso' => $idPerso,
+                'id_item' => $idItem
+            ];
+            $query->execute($values);
+
+            //print_r($query->errorInfo());
+        }
+
+        public function modifItem($idItem, $idPerso, $newNbItem) {
+            $query = $this->_db->prepare('UPDATE items_persos SET nb_items = :nb_items WHERE idPerso = :idPerso AND id_item = :id_item');
+            $values = [
+                'idPerso' => $idPerso,
+                'id_item' => $idItem,
+                'nb_items' => $newNbItem
+            ];
+            $query->execute($values);
+
+            //print_r($query->errorInfo());            
         }
     }
